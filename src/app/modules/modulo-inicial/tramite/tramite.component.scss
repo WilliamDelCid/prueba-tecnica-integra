@@ -1,0 +1,41 @@
+.custom-border-red {
+  border: 1px solid #E2574C;
+}
+.custom-blue {
+  font-size: 1.9rem;
+  color: #009FE3;
+}
+
+.text-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-text {
+  font-size: 0.8rem;
+}
+
+.btn-custom {
+  color: #111C4E;
+  border-color: #111C4E;
+  border-width: 1px;
+  background-color: transparent;
+}
+
+.btn-custom:hover {
+  color: #fff;
+  background-color: #111C4E;
+  border-width: 1px;
+  text-align: center;
+}
+
+.btn-long {
+  width: 180px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bg-custom{
+  background-color: #E2574C;
+}

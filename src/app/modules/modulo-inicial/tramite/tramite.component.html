@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Prueba Front end Angular</h1>
+  <h4 class="mt-5">Tipo de trámite</h4>
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label-form mb-2">Seleccione el tipo de trámite</label>
+      <select
+        class="form-select square-border square-border-secondary"
+        formControlName="nombre"
+      >
+        <option value="vialidad">Vialidad</option>
+        <option value="solvencia">Solvencia</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <h4 class="text-with-icon">
+      Requisitos para el trámite seleccionado:
+      <i class="bi bi-question-circle custom-blue"></i>
+    </h4>
+
+    <div class="row">
+      <div class="card border-0">
+        <div class="card-header text-white p-3 bg-custom">
+          <i class="bi bi-exclamation-triangle-fill"></i> Para solicitar trámite
+          de vialidad, suministre plantilla en formato Excel.
+        </div>
+        <div class="card-body custom-border-red">
+          <li>Cargar plantilla de Vialidad</li>
+          <li>Persona jurídica</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row mt-2">
+      <h5>Cargue archivo de vialidad a generar:</h5>
+      <form>
+        <div class="d-flex gap-2 mt-2">
+          <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none"/>
+          <button type="submit" class="btn btn-custom btn-long">
+            <span class="btn-text">Descargar plantilla</span>
+          </button>
+          <button type="button" class="btn btn-custom btn-long" onclick="document.getElementById('archivo').click();">
+            <span class="btn-text">Cargar documento</span>
+          </button>
+          <button type="button" class="btn btn-custom btn-long" >
+            <span class="btn-text">ATRÁS</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+</div>
