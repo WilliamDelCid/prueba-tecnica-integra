@@ -10,6 +10,10 @@ export class FileValidationService {
 
 
   validarCorrelativo(value: any, rowIndex: number): string | null {
+    if (value === undefined || value === null || value.toString().trim() === '') {
+      return `Correlativo en la fila ${rowIndex + 1} no debe estar vacío`;
+    }
+
     if (!value || isNaN(value)) {
       return `Correlativo en la fila ${rowIndex + 1} debe contener solo números`;
     }
@@ -49,10 +53,8 @@ export class FileValidationService {
   }
 
   validarTexto(value: any, fieldName: string, rowIndex: number, isDireccion: boolean): string | null {
-
     if (isDireccion) {
       return null;
-
     } else {
       if (!value || !isNaN(value)) {
         return `${fieldName} en la fila ${rowIndex + 1} no debe contener números`;
