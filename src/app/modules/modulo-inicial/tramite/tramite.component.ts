@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
-const letrasYEspaciosPattern = /^[a-zA-Z\s]+$/;
 
 @Component({
   selector: 'app-tramite',
@@ -16,11 +15,8 @@ export class TramiteComponent implements OnInit {
   p:any = 0;
 
   selectedOption: boolean = false;
-  botonesOption: boolean = false;
   botonDescargar: boolean = false;
-  cargarDocumento: boolean = false;
   isSuccess: boolean = false;
-  botonesDescargar: boolean = false;
   botonesCompletado: boolean = false;
   cantidadVialidades: number = 0;
   constructor(private toastr: ToastrService) { }
@@ -33,22 +29,16 @@ export class TramiteComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     if (selectElement.value === 'vialidad') {
       this.selectedOption = true;
-      this.botonesOption = true;
-      this.cargarDocumento = true;
       this.botonDescargar = true;
-      this.botonesDescargar = true;
 
 
     } else if (selectElement.value === 'solvencia') {
       this.selectedOption = false;
-      this.botonesOption = true;
-      this.cargarDocumento = false;
       this.botonDescargar = false;
+
     }
     else {
       this.selectedOption = false;
-      this.botonesOption = false;
-      this.cargarDocumento = false;
       this.botonDescargar = false;
     }
   }
@@ -119,7 +109,6 @@ export class TramiteComponent implements OnInit {
         this.selectedOption = false;
         return newRow;
       });
-      this.botonesDescargar = false;
       this.botonesCompletado = true;
       this.excelData = filteredData.slice(1);
       this.cantidadVialidades = this.excelData.length;
@@ -227,6 +216,10 @@ export class TramiteComponent implements OnInit {
   mostrarToastDeError(message: string): void {
     this.toastr.error('¡Error!', message);
 
+  }
+
+  guardarExcel(){
+    document.getElementById('archivo')?.click();
   }
 
 }

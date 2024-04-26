@@ -1,0 +1,10 @@
+<button
+  [disabled]="disabled"
+  [type]="type"
+  class="btn btn-custom btn-long"
+  [attr.form]="form ? form : null"
+  [ngClass]="bgColor"
+  (click)="handleAddButtonClick()"
+>
+  {{ leyenda }}
+</button>

@@ -1,0 +1,27 @@
+.btn-text {
+  font-size: 0.8rem;
+}
+
+.btn-custom {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-width: 1px;
+  background-color: transparent;
+  text-align: center;
+}
+
+.btn-custom.bg-white:hover {
+  color: #2294FF;
+  // background-color: var(--primary-color);
+  // border-width: 1px;
+}
+.btn-custom.bg-blue {
+  color: #fff;
+  background-color: var(--primary-color);
+  // border-width: 1px;
+}
+.btn-long {
+  width: 180px;
+  font-size: 14px;
+  font-weight: 500;
+}

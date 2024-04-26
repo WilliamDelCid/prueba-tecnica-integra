@@ -12,29 +12,7 @@
   gap: 10px;
 }
 
-.btn-text {
-  font-size: 0.8rem;
-}
 
-.btn-custom {
-  color: #111C4E;
-  border-color: #111C4E;
-  border-width: 1px;
-  background-color: transparent;
-}
-
-.btn-custom:hover {
-  color: #fff;
-  background-color: #111C4E;
-  border-width: 1px;
-  text-align: center;
-}
-
-.btn-long {
-  width: 180px;
-  font-size: 14px;
-  font-weight: 500;
-}
 
 .bg-custom{
   background-color: #E2574C;
@@ -42,7 +20,7 @@
 
 .custom-thead th {
   color: white;
-  background-color: #111C4E;
-  padding: 10px; /* Agrega relleno para hacer los encabezados más largos */
-  font-size: 16px; /* Aumenta el tamaño del texto */
+  background-color: var(--primary-color);
+  padding: 10px;
+  font-size: 16px;
 }

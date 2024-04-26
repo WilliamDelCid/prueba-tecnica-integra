@@ -13,7 +13,7 @@ import { SkeletonComponent } from './layouts/skeleton/skeleton.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    SkeletonComponent
+    SkeletonComponent,
   ],
   imports: [
     BrowserModule,
