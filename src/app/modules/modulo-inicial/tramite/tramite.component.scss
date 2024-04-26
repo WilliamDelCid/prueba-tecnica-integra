@@ -39,3 +39,10 @@
 .bg-custom{
   background-color: #E2574C;
 }
+
+.custom-thead th {
+  color: white;
+  background-color: #111C4E;
+  padding: 10px; /* Agrega relleno para hacer los encabezados más largos */
+  font-size: 16px; /* Aumenta el tamaño del texto */
+}

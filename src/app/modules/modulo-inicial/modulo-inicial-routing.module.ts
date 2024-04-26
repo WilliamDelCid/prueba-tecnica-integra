@@ -4,7 +4,7 @@ import { TramiteComponent } from './tramite/tramite.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path:'tramite',
     component:TramiteComponent
   }
 ];
