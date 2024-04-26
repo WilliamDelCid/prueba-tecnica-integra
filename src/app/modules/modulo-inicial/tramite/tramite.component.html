@@ -26,6 +26,7 @@
         </div>
         <div class="card-body custom-border-red">
           <li>Cargar plantilla de Vialidad</li>
+          <li>Persona jurídica</li>
         </div>
       </div>
     </div>
@@ -35,17 +36,9 @@
     <h5>Cargue archivo de vialidad a generar:</h5>
     <div class="d-flex gap-2 mt-2">
       <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none" (change)="validateFile($event)" />
-      <!-- <button type="submit" class="btn btn-custom btn-long" (click)="exportToExcel()" >
-        <span class="btn-text">Descargar plantilla</span>
-      </button> -->
-
       <app-button class="" type="button" [bgColor]="'bg-white'" [leyenda]="'Descargar plantilla'" (buttonClick)="exportToExcel()" *ngIf="botonDescargar"></app-button>
-<!--
-      <button type="button" class="btn btn-custom btn-long" onclick="document.getElementById('archivo').click();">
-        <span class="btn-text">Cargar documento</span>
-      </button> -->
       <app-button type="button" [bgColor]="'bg-blue'" [leyenda]="'Cargar documento'" (buttonClick)="guardarExcel()" *ngIf="botonDescargar"></app-button>
-      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'" (buttonClick)="guardarExcel()" ></app-button>
+      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'"  routerLink="/" ></app-button>
     </div>
   </div>
 
@@ -54,25 +47,9 @@
     <div class="d-flex gap-2 mt-2">
       <span>Confirme que se capturaron todos los datos de vialidad: </span>
       <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none" (change)="validateFile($event)" />
-
-      <!-- <button type="button" class="btn btn-custom btn-long" onclick="document.getElementById('archivo').click();">
-        <span class="btn-text">Volver a cargar</span>
-      </button> -->
-
       <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'Volver a cargar'" (buttonClick)="guardarExcel()" ></app-button>
-
-
-<!--
-      <button type="submit" class="btn btn-custom btn-long" >
-        <span class="btn-text">Ir a pagar</span>
-      </button> -->
-      <app-button type="button" [bgColor]="'bg-blue'" [leyenda]="'Ir a pagar'" (buttonClick)="guardarExcel()" [disabled]="cargaIncompleta" ></app-button>
-
-      <!-- <button type="button" class="btn btn-custom btn-long">
-        <span class="btn-text">ATRÁS</span>
-      </button> -->
-      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'"></app-button>
-
+      <app-button type="button" [bgColor]="'bg-blue'" [leyenda]="'Ir a pagar'" (buttonClick)="showPay()" [disabled]="cargaIncompleta" ></app-button>
+      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'" routerLink="/"></app-button>
     </div>
   </div>
 
@@ -82,6 +59,7 @@
         <table class="table table-striped table-bordered">
           <thead class="custom-thead">
             <tr>
+              <th></th>
               <th>Correlativo</th>
               <th>Número de NIT del empleado</th>
               <th>Número de DUI del empleado</th>
@@ -92,6 +70,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let row of excelData | paginate: { itemsPerPage: 10, currentPage: p }">
+              <td>
+                <span *ngIf="row.hasError" class="">
+                  <i class="icon-error error-icon bi bi-exclamation-circle-fill"></i>
+                </span>
+
+              </td>
               <td>{{ row.Correlativo }}</td>
               <td>{{ row.NumeroDeNitDelEmpleado }}</td>
               <td>{{ row.NumeroDeDuiDelEmpleado }}</td>
@@ -105,7 +89,6 @@
           <pagination-controls (pageChange)="pageChanged($event)" previousLabel="&lt;" nextLabel="&gt;"></pagination-controls>
         </div>
       </ng-container>
-
     </div>
   </div>
 </div>

@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
-
+import { ExcelRow } from '../../interface/ExcelRow.interface';
+import { FileValidationService } from '../../services/file-validation.service';
+const ITEMS_PER_PAGE_DEFAULT: number = 10;
+const INITIAL:number = 0;
 @Component({
   selector: 'app-tramite',
   templateUrl: './tramite.component.html',
   styleUrls: ['./tramite.component.scss']
 })
-export class TramiteComponent implements OnInit {
-  excelData: any[] = [];
-  pagedExcelData: any[] = [];
-  itemsPerPage: number = 10;
-  p:any = 0;
+export class TramiteComponent  {
+
+  excelData: ExcelRow[] = [];
+  pagedExcelData: ExcelRow[] = [];
+  itemsPerPage: number = ITEMS_PER_PAGE_DEFAULT;
+  p:any = INITIAL;
 
   selectedOption: boolean = false;
   botonDescargar: boolean = false;
   botonesCompletado: boolean = false;
   cargaIncompleta:boolean = false;
 
-  cantidadVialidades: number = 0;
-  constructor(private toastr: ToastrService) { }
-
-  ngOnInit(): void {
-
-  }
+  cantidadVialidades: number = INITIAL;
+  constructor(private toastr: ToastrService,private fileValidationService: FileValidationService) { }
 
   onChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
@@ -35,14 +35,16 @@ export class TramiteComponent implements OnInit {
     } else if (selectElement.value === 'solvencia') {
       this.selectedOption = false;
       this.botonDescargar = false;
+      this.botonesCompletado = false;
 
     }
     else {
       this.selectedOption = false;
       this.botonDescargar = false;
+      this.botonesCompletado = false;
+
     }
   }
-
 
   validateFile(event: any): void {
     const file = event.target.files[0];
@@ -77,40 +79,46 @@ export class TramiteComponent implements OnInit {
 
         const newRow: any = {};
 
-        const correlativoError = this.validarCorrelativo(row[0], index);
+        const correlativoError = this.fileValidationService.validarCorrelativo(row[0], index);
         if (correlativoError) {
-          this.mostrarToastDeError(correlativoError);
+          this.fileValidationService.mostrarToastDeError(correlativoError);
           this.cargaIncompleta = true;
+          newRow.hasError = true;
         }
         newRow.Correlativo = row[0];
-        const nitError = this.validarNit(row[1], index);
+        const nitError = this.fileValidationService.validarNit(row[1], index);
         if (nitError) {
-          this.mostrarToastDeError(nitError);
+          this.fileValidationService.mostrarToastDeError(nitError);
           this.cargaIncompleta = true;
+          newRow.hasError = true;
         }
         newRow.NumeroDeNitDelEmpleado = row[1];
-        const duiError = this.validarDui(row[2], index);
+        const duiError = this.fileValidationService.validarDui(row[2], index);
         if (duiError) {
-          this.mostrarToastDeError(duiError);
+          this.fileValidationService.mostrarToastDeError(duiError);
           this.cargaIncompleta = true;
+          newRow.hasError = true;
         }
         newRow.NumeroDeDuiDelEmpleado = row[2];
-        const direccionErrors = this.validarTexto(row[3], 'Direccion', index, true);
+        const direccionErrors = this.fileValidationService.validarTexto(row[3], 'Direccion', index, true);
         if (direccionErrors) {
-          this.mostrarToastDeError(direccionErrors);
+          this.fileValidationService.mostrarToastDeError(direccionErrors);
           this.cargaIncompleta = true;
+          newRow.hasError = true;
         }
         newRow.DireccionDeResidencia = row[3];
-        const nombresError = this.validarTexto(row[4], 'Nombres', index, false);
+        const nombresError = this.fileValidationService.validarTexto(row[4], 'Nombres', index, false);
         if (nombresError) {
-          this.mostrarToastDeError(nombresError);
+          this.fileValidationService.mostrarToastDeError(nombresError);
           this.cargaIncompleta = true;
+          newRow.hasError = true;
         }
         newRow.Nombres = row[4];
-        const apellidosError = this.validarTexto(row[5], 'Apellidos', index, false);
+        const apellidosError = this.fileValidationService.validarTexto(row[5], 'Apellidos', index, false);
         if (apellidosError) {
-          this.mostrarToastDeError(apellidosError);
+          this.fileValidationService.mostrarToastDeError(apellidosError);
           this.cargaIncompleta = true;
+          newRow.hasError = true;
         }
         newRow.Apellidos = row[5];
         this.selectedOption = false;
@@ -125,18 +133,6 @@ export class TramiteComponent implements OnInit {
     };
     fileReader.readAsArrayBuffer(file);
   }
-
-  setPage(page: number): void {
-    const startIndex = (page - 1) * this.itemsPerPage;
-    const endIndex = Math.min(startIndex + this.itemsPerPage, this.excelData.length);
-    this.pagedExcelData = this.excelData.slice(startIndex, endIndex);
-  }
-
-  pageChanged(event: any): void {
-    this.p = event;
-    this.setPage(this.p);
-  }
-
 
   exportToExcel(): void {
     const headers = ['Correlativo', 'NumeroDeNitDelEmpleado', 'NumeroDeDuiDelEmpleado', 'DirecciónDeResidencia', 'Nombres', 'Apellidos'];
@@ -161,75 +157,28 @@ export class TramiteComponent implements OnInit {
     saveAs(excelBlob, 'plantillaTramite.xlsx');
   }
 
-
-  validarCorrelativo(value: any, rowIndex: number): string | null {
-    if (!value || isNaN(value)) {
-      return `Correlativo en la fila ${rowIndex + 1} debe contener solo números`;
-    }
-    return null;
-  }
-
-
-  validarNit(value: any, rowIndex: number): string | null {
-    if (value === undefined || value === null) {
-      return `NIT en la fila ${rowIndex + 1} no puede estar vacío`;
-    }
-    const nit = value.toString().trim();
-
-    if (!nit) {
-      return `NIT en la fila ${rowIndex + 1} no puede estar vacío`;
-    }
-
-    if (!/^\d{9}$/.test(nit) && !/^\d{14}$/.test(nit)) {
-      return `Formato inválido para NIT en la fila ${rowIndex + 1}. Debe contener 9 o 14 dígitos`;
-    }
-
-    return null;
-  }
-
-
-  validarDui(value: any, rowIndex: number): string | null {
-    if (value === undefined || value === null) {
-      return `DUI en la fila ${rowIndex + 1} no puede estar vacío`;
-    }
-    const dui = value.toString().trim();
-    if (!dui) {
-      return `DUI en la fila ${rowIndex + 1} no puede estar vacío`;
-    }
-    if (!/^\d{9}$/.test(dui)) {
-      return `Formato inválido para DUI en la fila ${rowIndex + 1}. Debe contener 9 dígitos`;
-    }
-    return null;
-  }
-
-
-  validarTexto(value: any, fieldName: string, rowIndex: number, isDireccion: boolean): string | null {
-
-    if (isDireccion) {
-      return null;
-
-    } else {
-      if (!value || !isNaN(value)) {
-        return `${fieldName} en la fila ${rowIndex + 1} no debe contener números`;
-      }
-      if (typeof value !== 'string' || !value.trim()) {
-        return `${fieldName} en la fila ${rowIndex + 1} no puede estar vacío`;
-      }
-      if (!/^[a-zA-Z\s]+$/.test(value.trim())) {
-        return `${fieldName} en la fila ${rowIndex + 1} no puede contener números ni caracteres especiales`;
-      }
-    }
-
-    return null;
-  }
-
-  mostrarToastDeError(message: string): void {
-    this.toastr.error('¡Error!', message);
-
-  }
-
   guardarExcel(){
     document.getElementById('archivo')?.click();
+  }
+
+  showPay(): void {
+    if (this.cargaIncompleta) {
+    this.toastr.error('¡Error!', "Pago rechazado, problemas en plantilla");
+    return;
+    }
+    this.toastr.success('¡Éxito!', "Pago completado");
+  }
+
+// ! Paginacion
+  setPage(page: number): void {
+    const startIndex = (page - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.excelData.length);
+    this.pagedExcelData = this.excelData.slice(startIndex, endIndex);
+  }
+
+  pageChanged(event: any): void {
+    this.p = event;
+    this.setPage(this.p);
   }
 
 }
