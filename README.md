@@ -1,6 +1,21 @@
 # Proyecto de Prueba Técnica para Integra
 
 Este es un proyecto de prueba técnica desarrollado en Angular 13.
+[demo-proyecto](https://prueba-tecnica-integra.vercel.app/).
+
+Capturas de Pantalla modo Desktop
+
+![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/inicio-laptop.png)
+![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Tramite-laptop.png)
+![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Finalizacion-Laptop.png)
+
+Capturas de Pantalla modo Teléfono
+
+
+![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Tramite-telefono.png)
+![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Finalizacion-telefono.png)
+
+
 
 ## Requisitos previos
 
@@ -35,15 +50,3 @@ ng serve -o
 
 
 ```
-Capturas de Pantalla modo Desktop
-
-![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/inicio-laptop.png)
-![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Tramite-laptop.png)
-![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Finalizacion-Laptop.png)
-
-Capturas de Pantalla modo Teléfono
-
-
-![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Tramite-telefono.png)
-![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Finalizacion-telefono.png)
-
