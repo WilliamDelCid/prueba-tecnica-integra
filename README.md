@@ -1,7 +1,9 @@
 # Proyecto de Prueba Técnica para Integra
 
 Este es un proyecto de prueba técnica desarrollado en Angular 13.
-[demo-proyecto](https://prueba-tecnica-integra.vercel.app/).
+
+[demo-proyecto](https://prueba-tecnica-integra.vercel.app/){:target="_blank"}
+
 
 Capturas de Pantalla modo Desktop
 
