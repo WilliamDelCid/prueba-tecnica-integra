@@ -1,0 +1,59 @@
+.bg-1 {
+  background-image: url('/assets/images/bg1.png');
+  width: 100%;
+  background-size: cover;
+}
+
+.container-fluid {
+  width: 100%;
+}
+
+.animation-u1 {
+  animation: slideUp 1s ease-out 0s 1 normal;
+}
+
+.op-100 {
+  opacity: 90% !important;
+  transition: opacity 0.5s ease;
+}
+
+.op-100:hover {
+  opacity: 100% !important;
+}
+
+.animation-op-90 {
+  animation: fadeIn 1.5s ease-in-out 0s 1 normal;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 90%;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 95%;
+  }
+}
+
+.overall {
+  position: absolute;
+  top: 40%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.btn-custom{
+  background-color: var(--primary-color);
+  color: white;
+}

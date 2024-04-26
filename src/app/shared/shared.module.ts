@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
-    ButtonComponent
+    ButtonComponent,
+    ErrorPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,RouterModule
   ],
   exports:[
-    ButtonComponent
+    ButtonComponent,ErrorPageComponent
   ]
 })
 export class SharedModule { }
