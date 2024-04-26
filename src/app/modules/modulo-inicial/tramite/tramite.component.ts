@@ -16,8 +16,9 @@ export class TramiteComponent implements OnInit {
 
   selectedOption: boolean = false;
   botonDescargar: boolean = false;
-  isSuccess: boolean = false;
   botonesCompletado: boolean = false;
+  cargaIncompleta:boolean = false;
+
   cantidadVialidades: number = 0;
   constructor(private toastr: ToastrService) { }
 
@@ -30,7 +31,6 @@ export class TramiteComponent implements OnInit {
     if (selectElement.value === 'vialidad') {
       this.selectedOption = true;
       this.botonDescargar = true;
-
 
     } else if (selectElement.value === 'solvencia') {
       this.selectedOption = false;
@@ -70,6 +70,7 @@ export class TramiteComponent implements OnInit {
       const worksheet = workbook.Sheets[firstSheetName];
 
       const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      this.cargaIncompleta = false;
 
       const filteredData = excelData.map((row: any, index: number) => {
         if (index === 0) return {};
@@ -79,36 +80,45 @@ export class TramiteComponent implements OnInit {
         const correlativoError = this.validarCorrelativo(row[0], index);
         if (correlativoError) {
           this.mostrarToastDeError(correlativoError);
+          this.cargaIncompleta = true;
         }
         newRow.Correlativo = row[0];
         const nitError = this.validarNit(row[1], index);
         if (nitError) {
           this.mostrarToastDeError(nitError);
+          this.cargaIncompleta = true;
         }
         newRow.NumeroDeNitDelEmpleado = row[1];
         const duiError = this.validarDui(row[2], index);
         if (duiError) {
           this.mostrarToastDeError(duiError);
+          this.cargaIncompleta = true;
         }
         newRow.NumeroDeDuiDelEmpleado = row[2];
         const direccionErrors = this.validarTexto(row[3], 'Direccion', index, true);
         if (direccionErrors) {
           this.mostrarToastDeError(direccionErrors);
+          this.cargaIncompleta = true;
         }
         newRow.DireccionDeResidencia = row[3];
         const nombresError = this.validarTexto(row[4], 'Nombres', index, false);
         if (nombresError) {
           this.mostrarToastDeError(nombresError);
+          this.cargaIncompleta = true;
         }
         newRow.Nombres = row[4];
         const apellidosError = this.validarTexto(row[5], 'Apellidos', index, false);
         if (apellidosError) {
           this.mostrarToastDeError(apellidosError);
+          this.cargaIncompleta = true;
         }
         newRow.Apellidos = row[5];
         this.selectedOption = false;
         return newRow;
       });
+      if (!this.cargaIncompleta) {
+        this.cargaIncompleta = false;
+      }
       this.botonesCompletado = true;
       this.excelData = filteredData.slice(1);
       this.cantidadVialidades = this.excelData.length;
