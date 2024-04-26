@@ -16,6 +16,8 @@ Capturas de Pantalla modo Teléfono
 ![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Tramite-telefono.png)
 ![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/Finalizacion-telefono.png)
 
+Detalles generales
+![Descripción de la imagen](https://github.com/WilliamDelCid/prueba-tecnica-integra/blob/master/src/assets/img/404.png)
 
 
 ## Requisitos previos
