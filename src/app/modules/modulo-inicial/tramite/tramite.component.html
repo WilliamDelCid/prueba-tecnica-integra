@@ -32,26 +32,34 @@
     </div>
   </div>
 
-  <div class="row mt-4" *ngIf="selectedOption" >
-    <h5>Cargue archivo de vialidad a generar:</h5>
-    <div class="d-flex gap-2 mt-2">
-      <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none" (change)="validateFile($event)" />
-      <app-button class="" type="button" [bgColor]="'bg-white'" [leyenda]="'Descargar plantilla'" (buttonClick)="exportToExcel()" *ngIf="botonDescargar"></app-button>
-      <app-button type="button" [bgColor]="'bg-blue'" [leyenda]="'Cargar documento'" (buttonClick)="guardarExcel()" *ngIf="botonDescargar"></app-button>
-      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'"  routerLink="/" ></app-button>
+  <div class="row mt-4" *ngIf="selectedOption">
+    <div class="col-md-12 col-lg-9 col-sm-12">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2">
+      <h5>Cargue archivo de vialidad a generar:</h5>
+        <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none" (change)="validateFile($event)" />
+        <app-button class="mb-2 mb-md-0" type="button" [bgColor]="'bg-white'" [leyenda]="'Descargar plantilla'" (buttonClick)="exportToExcel()" *ngIf="botonDescargar"></app-button>
+        <app-button class="mb-2 mb-md-0" type="button" [bgColor]="'bg-blue'" [leyenda]="'Cargar documento'" (buttonClick)="guardarExcel()" *ngIf="botonDescargar"></app-button>
+        <app-button  type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'" routerLink="/"></app-button>
+      </div>
     </div>
   </div>
 
-  <div class="row mt-4" *ngIf="botonesCompletado" >
-    <h5>VIALIDADES A GENERAR: {{cantidadVialidades}}</h5>
-    <div class="d-flex gap-2 mt-2">
-      <span>Confirme que se capturaron todos los datos de vialidad: </span>
-      <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none" (change)="validateFile($event)" />
-      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'Volver a cargar'" (buttonClick)="guardarExcel()" ></app-button>
-      <app-button type="button" [bgColor]="'bg-blue'" [leyenda]="'Ir a pagar'" (buttonClick)="showPay()" [disabled]="cargaIncompleta" ></app-button>
-      <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'" routerLink="/"></app-button>
+
+
+
+  <div class="row mt-4" *ngIf="botonesCompletado">
+    <div class="col-md-12 col-lg-9 col-sm-12">
+      <h5>VIALIDADES A GENERAR: {{cantidadVialidades}}</h5>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2">
+        <span class="mb-2 mb-md-0">Confirme que se capturaron todos los datos de vialidad: </span>
+        <input type="file" id="archivo" accept=".csv, .xls, .xlsx" style="display: none" (change)="validateFile($event)" />
+        <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'Volver a cargar'" (buttonClick)="guardarExcel()" class="mb-2 mb-md-0"></app-button>
+        <app-button type="button" [bgColor]="'bg-blue'" [leyenda]="'Ir a pagar'" (buttonClick)="showPay()" [disabled]="cargaIncompleta" class="mb-2 mb-md-0"></app-button>
+        <app-button type="button" [bgColor]="'bg-white'" [leyenda]="'ATRÁS'" routerLink="/" class="mb-2 mb-md-0"></app-button>
+      </div>
     </div>
   </div>
+
 
   <div class="row mt-3 mb-5" *ngIf="botonesCompletado">
     <div class="table-responsive">
