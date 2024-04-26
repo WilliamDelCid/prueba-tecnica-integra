@@ -2,8 +2,7 @@
 
 Este es un proyecto de prueba técnica desarrollado en Angular 13.
 
-[demo-proyecto](https://prueba-tecnica-integra.vercel.app/){:target="_blank"}
-
+[demo-proyecto](https://prueba-tecnica-integra.vercel.app/).
 
 Capturas de Pantalla modo Desktop
 
