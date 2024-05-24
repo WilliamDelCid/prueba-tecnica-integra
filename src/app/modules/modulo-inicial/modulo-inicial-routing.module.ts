@@ -9,7 +9,7 @@ const routes: Routes = [
     component:DashboardComponent
   },
   {
-    path:'tramite',
+    path:'vialidad',
     component:TramiteComponent
   }
 ];

@@ -11,12 +11,10 @@ export class FileValidationService {
 
   validarCorrelativo(value: any, rowIndex: number): string | null {
     if (value === undefined || value === null || value.toString().trim() === '') {
-      return `Correlativo en la fila ${rowIndex + 1} no debe estar vacío`;
+      return `Correlativo en la fila ${rowIndex + 4}  debe estar vacío`;
     }
 
-    if (!value || isNaN(value)) {
-      return `Correlativo en la fila ${rowIndex + 1} debe contener solo números`;
-    }
+
     return null;
   }
 
@@ -31,7 +29,7 @@ export class FileValidationService {
       return `NIT en la fila ${rowIndex + 1} no puede estar vacío`;
     }
 
-    if (!/^\d{9}$/.test(nit) && !/^\d{14}$/.test(nit)) {
+    if (!/^\d{5}$/.test(nit) && !/^\d{19}$/.test(nit)) {
       return `Formato inválido para NIT en la fila ${rowIndex + 1}. Debe contener 9 o 14 dígitos`;
     }
 
@@ -43,10 +41,8 @@ export class FileValidationService {
       return `DUI en la fila ${rowIndex + 1} no puede estar vacío`;
     }
     const dui = value.toString().trim();
-    if (!dui) {
-      return `DUI en la fila ${rowIndex + 1} no puede estar vacío`;
-    }
-    if (!/^\d{9}$/.test(dui)) {
+
+    if (!/^\d{5}$/.test(dui)) {
       return `Formato inválido para DUI en la fila ${rowIndex + 1}. Debe contener 9 dígitos`;
     }
     return null;
@@ -56,22 +52,18 @@ export class FileValidationService {
     if (isDireccion) {
       return null;
     } else {
-      if (!value || !isNaN(value)) {
-        return `${fieldName} en la fila ${rowIndex + 1} no debe contener números`;
-      }
+
       if (typeof value !== 'string' || !value.trim()) {
         return `${fieldName} en la fila ${rowIndex + 1} no puede estar vacío`;
       }
-      if (!/^[a-zA-Z\s]+$/.test(value.trim())) {
-        return `${fieldName} en la fila ${rowIndex + 1} no puede contener números ni caracteres especiales`;
-      }
+
     }
 
     return null;
   }
 
   mostrarToastDeError(message: string): void {
-    this.toastr.error('¡Error!', message);
+    this.toastr.success('¡Error!', message);
   }
 
 }

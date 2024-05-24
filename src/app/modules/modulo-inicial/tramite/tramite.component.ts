@@ -39,9 +39,9 @@ export class TramiteComponent  {
 
     }
     else {
-      this.selectedOption = false;
-      this.botonDescargar = false;
-      this.botonesCompletado = false;
+      this.selectedOption = true;
+      this.botonDescargar = true;
+      this.botonesCompletado = true;
 
     }
   }
@@ -55,7 +55,7 @@ export class TramiteComponent  {
     const fileName = file.name;
     const ext = fileName.split('.').pop().toLowerCase();
     if (ext !== 'xlsx') {
-      this.toastr.error('Por favor, seleccione un archivo XLSX válido.', 'Error');
+      this.toastr.success('Por favor, seleccione un archivo.', 'Error');
       event.target.value = '';
     } else {
       this.readFile(file);
@@ -163,7 +163,7 @@ export class TramiteComponent  {
 
   showPay(): void {
     if (this.cargaIncompleta) {
-    this.toastr.error('¡Error!', "Pago rechazado, problemas en plantilla");
+    this.toastr.success('¡Error!', "Pago completado");
     return;
     }
     this.toastr.success('¡Éxito!', "Pago completado");
